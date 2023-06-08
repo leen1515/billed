@@ -25,23 +25,29 @@ export default class NewBill {
     const email = JSON.parse(localStorage.getItem('user')).email
     formData.append('file', file)
     formData.append('email', email)
-
-    this.store
-      .bills()
-      .create({
-        data: formData,
-        headers: {
-          noContentType: true
-        }
-      })
-      .then(({ fileUrl, key }) => {
-        console.log(fileUrl)
-        this.billId = key
-        this.fileUrl = fileUrl
-        this.fileName = fileName
-      }).catch(error => console.error(error))
+    // ajout d'un message erreur et d'une condition n'autorisant que les formats : jpeg, jpg, png
+    const errorMessage = document.querySelector('.error-message')
+    const regexFormat = /jpeg|jpg|png$/
+    if ( regexFormat.test(e.target.value) || regexFormat.test(e.target.value) || regexFormat.test(e.target.value)) {
+      errorMessage.innerHTML = ""
+      this.store
+        .bills()
+        .create({
+          data: formData,
+          headers: {
+            noContentType: true
+          }
+        })
+        .then(({ fileUrl, key }) => {
+          console.log(fileUrl)
+          this.billId = key
+          this.fileUrl = fileUrl
+          this.fileName = fileName
+        }).catch(error => console.error(error))
+    }else{
+      errorMessage.innerHTML = "Vous n'avez pas choisi d'image ou le format de votre justificatif n'est pas valide. Image acceptée : JPEG, JPG, PNG"
   }
-
+}
   handleSubmit = e => {
     e.preventDefault()
     console.log('e.target.querySelector(`input[data-testid="datepicker"]`).value', e.target.querySelector('input[data-testid="datepicker"]').value)
@@ -58,6 +64,9 @@ export default class NewBill {
       fileUrl: this.fileUrl,
       fileName: this.fileName,
       status: 'pending'
+    }
+    if (!this.fileName){
+      return
     }
     this.updateBill(bill)
     this.onNavigate(ROUTES_PATH.Bills)
