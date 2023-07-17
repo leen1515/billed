@@ -215,4 +215,49 @@ describe('Given I am connected as an employee', () => {
       expect(bills[0].name).toContain(testBill.name)
     })
   })
+  describe("When an error occurs on API", async () => {
+    // partie a executer avant chaque test dans la suite qui suit
+    beforeEach(() => {
+      jest.spyOn(mockStore, "bills")
+      window.localStorage.setItem("user", JSON.stringify({type: "Employee", email: "a@a",}))
+      const root = document.createElement("div")
+      root.setAttribute("id", "root")
+      document.body.appendChild(root)
+      router()
+      })
+    test("fetches bills from an API and fails with 404 message error", async () => {
+      // mock entraine une promesse rompue avec en raison
+      // l'objet Error 404
+      mockStore.bills.mockImplementationOnce(() => {
+        return {
+          list: () => {
+            return Promise.reject(new Error("Erreur 404"))
+          }
+        }
+      })
+    window.onNavigate(ROUTES_PATH.Bills);
+    // communique l'erreur 404 en donnée
+    document.body.innerHTML = BillsUI({ error: "Erreur 404" })
+    await new Promise(process.nextTick)
+    // s'attend en cas de page non trouvé de trouver la phrase Erreur 404
+    const message = await screen.getByText(/Erreur 404/)
+    expect(message).toBeTruthy()
+    })
+
+    test("fetches messages from an API and fails with 500 message error", async () => {
+      mockStore.bills.mockImplementationOnce(() => {
+        return {
+          list: () => {
+            return Promise.reject(new Error("Erreur 500"))
+          }
+        }
+      })
+      window.onNavigate(ROUTES_PATH.Bills)
+      await new Promise(process.nextTick)
+      // communique l'erreur 500 dans l'interface
+      document.body.innerHTML = BillsUI({ error: "Erreur 500" })
+      const message = screen.getByText(/Erreur 500/)
+      expect(message).toBeTruthy()
+    })
+  })
 })
