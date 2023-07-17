@@ -39,4 +39,25 @@ describe("Given I am connected as an employee", () => {
       expect(dates).toEqual(datesSorted)
     })
   })
+
+  // bouton 'nouvelle note de frais'
+  describe("When i click on New Bill", () => {
+    test("Then new bill's page is open", () => {
+      const onNavigate = (pathname) => {
+        document.body.innerHTML = ROUTES({pathname})
+      };
+      // stock le mock de l'objet construisant les notes avec comme données : mockedStore
+      const mockBill = new Bills({document, onNavigate, mockedStore, localStorage: window.localStorage})
+      // stock le mock de sa méthode : permet de simuler le comportement de la fonction avec en argument 'event'
+      const clickNewBill = jest.fn((e) => mockBill.handleClickNewBill(e))
+      const newBillButton = screen.getByTestId("btn-new-bill")
+      newBillButton.addEventListener("click", clickNewBill)
+      // simule le click de l'utilisateur sur le bouton
+      userEvent.click(newBillButton)
+      // s'attend à que la fonction mockée soit appelée
+      expect(clickNewBill).toHaveBeenCalled()
+      // s'attend que la page nouvelle note s'affiche
+      expect(screen.getAllByText("Envoyer une note de frais")).toBeTruthy()
+    })
+  })
 })
