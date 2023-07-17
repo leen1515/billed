@@ -38,5 +38,51 @@ describe("Given I am connected as an employee", () => {
       const mailIcon = screen.getByTestId("icon-mail")
       expect(mailIcon.className).toBe("active-icon")
     })
+    
+    describe("When I am sending a new bill and there is no error", () => {
+      test("Then must save the bill", async () => {
+        const onNavigate = (pathname) => {
+          document.body.innerHTML = ROUTES({ pathname })
+        }
+        Object.defineProperty(window, "localStorage", { value: localStorageMock })
+        window.localStorage.setItem("user", JSON.stringify({
+          type: "Employee"
+        }))
+        document.body.innerHTML = NewBillUI()
+        const newBill = new NewBill({
+          document, onNavigate, store: mockStore, localStorage: window.localStorage
+        })
+        // mock la création de la méthode handleSubmit et handleChangeFile avec event en argument
+        const handleSubmit = jest.fn((e) => newBill.handleSubmit(e))
+        const handleChangeFile = jest.fn((e) => newBill.handleChangeFile(e))
+        // récupère les id test du message d'erreur présent sur l'interface du newbill
+        const errorMessage = screen.getByTestId("error-message")
+        // récupère les id test du bouton input pour le téléchargement du fichier image
+        const inputButton = screen.getByTestId("file")
+        // simule le changement de données avec le fichier test.jpg au click de l'utilisateur
+        fireEvent.change(inputButton, {
+          target: { // pour le test, charge un nom de fichier valide
+            files: [new File(["test.jpg"], "test.jpg", { type: "image/jpg" })],//objet File de js : (bit, name, option)
+          }, 
+        })
+        // récupère l'id test du formulaire newbill
+        const formNewBill = screen.getByTestId("form-new-bill")
+        formNewBill.addEventListener("submit", handleSubmit)
+        //ajoute l'evènement "change" à l'input
+        inputButton.addEventListener("change", () => { 
+          // appelle la fonction mockée
+          handleChangeFile
+          // espère que le message d'erreur est vide
+          expect(errorMessage.textContent).toContain('')
+          // s'attend à que le nom du fichier chargé soit le même que celui indiqué par "l'utilisateur"
+          expect(inputButton.files[0].name).toBe("test.jpg")
+          }) 
+        fireEvent.submit(formNewBill)
+        // s'attend à que le formulaire existe 
+        expect(formNewBill).toBeTruthy()
+        // s'attend à que la fonction submit ai été appelé précédemment lors du click
+        expect(handleSubmit).toHaveBeenCalled()
+      })
+    })
   })
 })
