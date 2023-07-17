@@ -60,4 +60,22 @@ describe("Given I am connected as an employee", () => {
       expect(screen.getAllByText("Envoyer une note de frais")).toBeTruthy()
     })
   })
+    // bouton icone ouverture modale justificatif
+  describe("When i click on the icone for justificatif's modal", () => {
+    test("Then modal is displayed", () => {
+      const onNavigate = (pathname) => {
+        document.body.innerHTML = ROUTES({pathname})
+      }
+      document.body.innerHTML = BillsUI({data: bills})
+      $.fn.modal = jest.fn()
+      const mockBill = new Bills({document, onNavigate, mockedStore, localStorage: window.localStorage})
+      const iconEye = screen.getAllByTestId("icon-eye")[0]
+      const clickIconeImage = jest.fn(mockBill.handleClickIconEye(iconEye))
+      iconEye.addEventListener("click", clickIconeImage)
+      userEvent.click(iconEye);
+
+      expect(clickIconeImage).toHaveBeenCalled;
+      expect(screen.getAllByText("Justificatif")).toBeTruthy()
+    })
+  })
 })
