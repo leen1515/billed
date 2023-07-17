@@ -55,7 +55,7 @@ export default () => {
                   <div class="col-half">
                     <label for="file" class="bold-label">Justificatif</label>
                     <input required type="file" class="form-control blue-border" data-testid="file" />
-                    <div class = "error-message"></div>
+                    <div class = "error-message" data-testid="error-message"></div>
                   </div>
                 </div>
             </div>
