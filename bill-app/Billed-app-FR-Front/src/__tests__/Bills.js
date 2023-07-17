@@ -79,3 +79,36 @@ describe("Given I am connected as an employee", () => {
     })
   })
 })
+
+//Test d'intégration GET
+describe("Given i am a user connected as employee", () => {
+  describe("When an error occurs on API", () => {
+    // s'execute avant chaque test de la série qui suit
+    beforeEach(() => {
+      jest.spyOn(mockedStore, "bills")
+      window.localStorage.setItem("user", JSON.stringify({type: "Employee", email: "a@a"}))
+      const root = document.createElement("div")
+      root.setAttribute("id", "root")
+      document.body.appendChild(root)
+      // initialise le router
+      router()
+    })
+
+    test("Fetches bills from an API and fails with 404 message error", async () => {
+      mockedStore.bills.mockImplementationOnce(() => {
+        return {list: () => {
+            return Promise.reject(new Error("Erreur 404"));
+          }
+        }
+      })
+      // Le chemin pour l'affichage de l'ensemble des notes
+      // correspondant à l'utilisateur
+      window.onNavigate(ROUTES_PATH.Bills)
+      // simule l'affichage dans l'interface des notes avec en donnée l'erreur 404
+      document.body.innerHTML = BillsUI({ error: "Erreur 404" })
+      await new Promise(process.nextTick);
+      const message = await screen.getByText(/Erreur 404/)
+      expect(message).toBeTruthy()
+    })
+  })
+})
