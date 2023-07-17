@@ -84,5 +84,39 @@ describe("Given I am connected as an employee", () => {
         expect(handleSubmit).toHaveBeenCalled()
       })
     })
+
+    describe("When I select a file with a bad format", () => {
+      test("Then the user could see the alert's message", () => {
+        const onNavigate = (pathname) => {
+          document.body.innerHTML = ROUTES({ pathname })
+        }
+        Object.defineProperty(window, "localStorage", { value: localStorageMock })
+        window.localStorage.setItem("user", JSON.stringify({
+          type: "Employee"
+        }))
+        document.body.innerHTML = NewBillUI()
+        const newBill = new NewBill({
+          document, onNavigate, store: mockStore, localStorage: window.localStorage
+        })
+        
+        // mock dans la constance la méthode de l'objet newBill
+        const handleChangeFile = jest.fn((e) => newBill.handleChangeFile(e))
+        const inputButton = screen.getByTestId("file")
+        const errorMessage = screen.getByTestId("error-message")
+        inputButton.addEventListener("change", () => { 
+          handleChangeFile
+          }) 
+        // simule le changement de données avec le fichier test.jpg au click de l'utilisateur
+        fireEvent.change(inputButton, {
+          target: {
+            files: [new File(["test.txt"], "test.txt", { type: "text/txt" })],//objet File de js : (bit, name, option)
+          }, 
+        })
+        
+        expect(inputButton.files[0].name).toBe("test.txt")
+        // s'attend à que le message d'erreur contient la phrase indiquée
+        expect(errorMessage.textContent).toContain("Le format de votre justificatif n'est pas valide. Image acceptée : JPEG, JPG, PNG")
+      })
+    })
   })
 })
