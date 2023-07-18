@@ -2,16 +2,15 @@
 # BILLED
 https://github.com/leen1515/billed/
 
-Il est prévu que l'application "Billed" soit lancée pour être utilisée dans le cadre de la gestion des notes de frais des employés au sein d'une entreprise. L'administrateur constate les notes et les valide ou les invalide, sachant que ces notes sont par défaut "En attente".
-Deux comptes se diffèrent ainsi l'un de l'autre : l'employé rédige ses notes et les soumets tandis que le compte administrateur les analyses, les commentes puis les valide ou non.
+Il est prévu que cette application de "Billed" soit lancée pour être utilisée, entre-autres fonctionnalités, au sein d'une équipe de ressources humaines.
+La fonctionnalité consacrée à la gestion des notes de frais des employés doit être présenté au sein de l'entreprise pour pouvoir être lancée en production.
+Son rôle : Deux comptes se diffèrent l'un de l'autre au sein d'une interface permettant le partage et la validation de note de frais. 
+Celui de l'employé, il rédige ses notes et les soumets (l'état de ses notes sont par défaut "En attente"). 
+Ainsi que celui de l'administrateur, il les analyses, les commentes puis les valide ou non.
 
 # Contexte
-Suite au départ d'un membre de l'équipe des développeurs, la correction des bugs trouvés de l'application, la rédaction d'un plan de test "End-to-End" du parcours "Employé" ainsi que l'écriture des tests unitaires et d'intégrations avec le framework Jest (le fichier Bills.js ainsi que de NewBill.js) sont les objectifs principaux pour mener à son terme ce projet.
-
-
-
-
-
+Suite au départ d'un membre de l'équipe des développeurs de Billed (spécialisé des solutions Saas destinées aux équipes de ressources humaines),
+la correction des bugs trouvés de l'application, la rédaction d'un plan de test "End-to-End" du parcours "Employé" ainsi que l'écriture des tests unitaires et d'intégrations avec le framework Jest (le fichier Bills.js ainsi que de NewBill.js) sont les objectifs principaux pour mener à son terme ce projet.
 
 ## Installation
 
