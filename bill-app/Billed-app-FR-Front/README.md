@@ -48,6 +48,12 @@ http://127.0.0.1:8080/
 
 * *Pour live-server, prendre soin à ce qu'il n'y ai pas de nombreuses pages d'ouvertes de Billed => provoque un "change detected" constant qui se résoud sans difficulté en relançant vs-code, les servers etc...* *
 
+## Connexion à l'application
+utilisateur : **admin@test.tld**  
+mot de passe : **admin** 
+
+utilisateur : **employee@test.tld**
+mot de passe : **employee** 
 
 ## Screenshots
 
