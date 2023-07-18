@@ -4,7 +4,7 @@ https://github.com/leen1515/billed/
 
 Il est prévu que cette application de "Billed" soit lancée pour être utilisée, entre-autres fonctionnalités, au sein d'une équipe de ressources humaines.
 La fonctionnalité consacrée à la gestion des notes de frais des employés doit être présenté au sein de l'entreprise pour pouvoir être lancée en production.
-Son rôle : Deux comptes se diffèrent l'un de l'autre au sein d'une interface permettant le partage et la validation de note de frais. 
+Son rôle : Deux types de comptes se diffèrent l'un de l'autre au sein d'une interface permettant le partage et la validation de note de frais. 
 Celui de l'employé, il rédige ses notes et les soumets (l'état de ses notes sont par défaut "En attente"). 
 Ainsi que celui de l'administrateur, il les analyses, les commentes puis les valide ou non.
 
@@ -43,7 +43,7 @@ il se connecte avec l'api. Quant tout se passe comme prêvu, le fond du formulai
   live-server
 ```
 
-L'application est enfin visible en locale sur le port 8080
+L'application est enfin visible en local sur le port 8080
 http://127.0.0.1:8080/
 
 * *Pour live-server, prendre soin à ce qu'il n'y ai pas de nombreuses pages d'ouvertes de Billed => provoque un "change detected" constant qui se résoud sans difficulté en relançant vs-code, les servers etc...* *
