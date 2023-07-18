@@ -2,11 +2,11 @@
 # BILLED
 https://github.com/leen1515/billed/
 
-Il est prévu que l'application "Billed" soit lancée pour être utilisée dans le cadre de la gestion des notes de frais des employés au sein d'une entreprise. L'administrateur constate les notes et les valide ou les invalide, sachant que ces notes sont par défaut en attente.
+Il est prévu que l'application "Billed" soit lancée pour être utilisée dans le cadre de la gestion des notes de frais des employés au sein d'une entreprise. L'administrateur constate les notes et les valide ou les invalide, sachant que ces notes sont par défaut "En attente".
 Deux comptes se diffèrent ainsi l'un de l'autre : l'employé rédige ses notes et les soumets tandis que le compte administrateur les analyses, les commentes puis les valide ou non.
 
 # Contexte
-Suite au départ d'un membre de l'équipe des développeurs, la correction des bugs trouvés de l'application, la rédaction d'un plan de test "End-to-End" du parcours "Employé" ainsi que l'écriture des tests unitaires et d'intégrations du fichier Bills.js ainsi que de NewBill.js sont les objectifs principaux pour mener à son terme le projet.
+Suite au départ d'un membre de l'équipe des développeurs, la correction des bugs trouvés de l'application, la rédaction d'un plan de test "End-to-End" du parcours "Employé" ainsi que l'écriture des tests unitaires et d'intégrations avec le framework Jest (le fichier Bills.js ainsi que de NewBill.js) sont les objectifs principaux pour mener à son terme ce projet.
 
 
 
@@ -38,29 +38,29 @@ http://127.0.0.1:5678/
 ```
 
 Ensuite avec l'extension live-server, il faut demarrer le Front,
-il se connecte avec l'api. Quant tout se passe comme prêvu, le fond du formulaire sera bleu, sinon il sera blanc => problème avec le server coté back.
+il se connecte avec l'api. Quant tout se passe comme prêvu, le fond du formulaire est bleu, sinon il est blanc => problème avec le server coté back.
 
 ```bash
   live-server
 ```
 
-L'application est enfin visible en local sur le port 8080
+L'application est enfin visible en locale sur le port 8080
 http://127.0.0.1:8080/
 
-(Pour live-server, prendre soin à ce qu'il n'y ai pas de nombreuses pages d'ouvertes de Billed => provoque un "change detected" constant qui se résoud sans difficulté en relançant vs-code, les servers etc...)
+* *Pour live-server, prendre soin à ce qu'il n'y ai pas de nombreuses pages d'ouvertes de Billed => provoque un "change detected" constant qui se résoud sans difficulté en relançant vs-code, les servers etc...* *
 
 
 ## Screenshots
 
-En analysant tous les fichiers confondus, la couverture des tests sur le script atteint 89,47% en "Statement"
+En analysant tous les fichiers confondus, la couverture des tests sur le script atteint 89,47% en "Statements"
 
 ![App Screenshot](https://raw.githubusercontent.com/leen1515/billed/main/bill-app/annexes/resultat-test.PNG)
 
 
-Avec une douzaine de tests unitaires et d'intégrations écrite, Bills.js ainsi que NewBill.js dépassent les 90% d'état du script couvert par les tests.
+Avec une douzaine de tests unitaires et d'intégrations écrites, Bills.js ainsi que NewBill.js dépassent les 90% d'état de leur script couvert par les tests.
 
 ## Usage/Examples
-Pour lancer Jest et ainsi tester les scripts afin qu'ils retournent son résultat
+Pour lancer Jest et ainsi tester le code JS afin qu'ils retournent son résultat
 
 ```bash
 npm run test
@@ -76,7 +76,7 @@ http://127.0.0.1:8080/coverage/lcov-report
 
 
 
-L'avenir de cette application, ses mises à jour, l'experience des utilisateur, sont ainsi assurés gràce à une large couverture des tests sur son script
+L'avenir de cette application, ses mises à jour, l'experience des utilisateur, sont ainsi assurés gràce à une large couverture des tests sur son code
 
 ## License
 
